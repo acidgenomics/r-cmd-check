@@ -11,7 +11,7 @@ rm -rf .Rcheck
 git clone https://github.com/acidgenomics/Rcheck.git .Rcheck
 
 # Copy dotfiles.
-"${source_dir}/copy-dotfiles"
+./.Rcheck/copy-dotfiles
 
 # Useful for debugging:
 # > pwd
