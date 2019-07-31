@@ -15,11 +15,12 @@ then
 fi
 
 image="acidgenomics/${image}:${tag}"
+workdir="/Rcheck"
 
 docker pull "$image"
 docker run \
     -it \
-    --volume="${PWD}:/Rcheck" \
-    --workdir="/Rcheck" \
+    --volume="${PWD}:${workdir}" \
+    --workdir="${workdir}" \
     "$image" \
     ".Rcheck/run-checks"
