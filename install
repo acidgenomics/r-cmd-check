@@ -4,10 +4,5 @@ set -Eeu -o pipefail
 # Install Rcheck repo.
 # Updated 2019-07-31.
 
-# Clone the repository.
 rm -rf .Rcheck
 git clone https://github.com/acidgenomics/Rcheck.git .Rcheck
-
-# Useful for debugging:
-# > pwd
-# > ls -al
