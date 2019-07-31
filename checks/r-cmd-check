@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -Eeu -o pipefail
+
+# R CMD CHECK
+# Updated 2019-07-31.
+
+# Set `--as-cran` flag for extra verbose incoming package checks.
+
+R CMD build . --no-build-vignettes --no-manual
+R CMD check "$PKG_TARBALL" --ignore-vignettes --no-manual --timings

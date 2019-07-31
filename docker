@@ -22,4 +22,4 @@ docker run -ti \
     --volume="${PWD}:/${package}" \
     --workdir="/${package}" \
     "$image" \
-    ./rcmdcheck.sh
+    check
