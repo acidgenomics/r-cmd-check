@@ -9,7 +9,7 @@ rm -rf .Rcheck
 git clone https://github.com/acidgenomics/Rcheck.git .Rcheck
 
 # Copy dotfiles.
-cp -f .Rcheck/.{Rbuildignore,gitignore,lintr} .
+cp -n .Rcheck/.{Rbuildignore,gitignore,lintr} .
 
 # Useful for debugging:
 # > pwd
