@@ -4,8 +4,6 @@ set -Eeu -o pipefail
 # Run dockerized R package checks.
 # Updated 2019-07-31.
 
-source_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)"
-
 if [[ -z "${image:-}" ]]
 then
     image="basejump"
@@ -17,9 +15,11 @@ then
 fi
 
 image="acidgenomics/${image}:${tag}"
+
 docker pull "$image"
-docker run -ti \
-    --volume="${PWD}:/work" \
-    --workdir="/work" \
+docker run \
+    -it \
+    --volume="${PWD}:/Rcheck" \
+    --workdir="/Rcheck" \
     "$image" \
-    "${source_dir}/run-checks"
+    ".Rcheck/run-checks"
