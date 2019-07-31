@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -Eeu -o pipefail
+
+# Copy dotfiles.
+# Updated 2019-07-31.
+
+if [[ ! -d ".Rcheck" ]]
+then
+    >&2 printf "Error: '.Rcheck' directory is missing.\n"
+    exit 1
+fi
+
+cp -n .Rcheck/.{Rbuildignore,gitignore,lintr} .
