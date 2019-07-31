@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 ## Check package coverage with covr.
-## Updated 2019-07-29.
+## Updated 2019-07-31.
 
 options(
     error = quote(quit(status = 1L)),
@@ -20,6 +20,6 @@ pct <- covr::percent_coverage(cov)
 
 print(cov)
 
-if (pct < 90L) {
+if (pct < 80L) {
     stop(sprintf("Coverage is %s%%.", round(pct, digits = 2L)))
 }

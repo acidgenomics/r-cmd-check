@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 ## Check package lints with lintr.
-## Updated 2019-07-22.
+## Updated 2019-07-31.
 
 options(
     error = quote(quit(status = 1L)),

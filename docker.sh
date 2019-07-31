@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -Eeuxo pipefail
 
+# Run dockerized R CMD CHECK.
+# Updated 2019-07-31.
+
 if [[ -z "${image:-}" ]]
 then
     image="basejump"
