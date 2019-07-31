@@ -30,24 +30,35 @@ export PKG_VERSION
 PKG_TARBALL="${PKG_NAME}_${PKG_VERSION}.tar.gz"
 export PKG_TARBALL
 
-echo "travis_fold:start:session-info"
+travis_fold() {
+    local action="$1"
+    local name="$2"
+    echo -en "travis_fold:${action}:${name}\r"
+}
+
+travis_fold start session-info
+echo "Session information"
 "${checks_dir}/session-info"
-echo "travis_fold:end:session-info"
+travis_fold end session-info
 
-echo "travis_fold:start:lints"
+travis_fold start lints
+echo "Lints"
 "${checks_dir}/lints"
-echo "travis_fold:end:lints"
+travis_fold end lints
 
-echo "travis_fold:start:r-cmd-check"
+travis_fold start r-cmd-check
+echo "R CMD CHECK"
 "${checks_dir}/r-cmd-check"
-echo "travis_fold:end:r-cmd-check"
+travis_fold end r-cmd-check
 
-echo "travis_fold:start:bioc-check"
+travis_fold start bioc-check
+echo "BiocCheck"
 "${checks_dir}/bioc-check"
-echo "travis_fold:end:bioc-check"
+travis_fold end bioc-check
 
-echo "travis_fold:start:coverage"
+travis_fold start coverage
+echo "Coverage"
 "${checks_dir}/coverage"
-echo "travis_fold:end:coverage"
+travis_fold end coverage
 
 rm "$PKG_TARBALL"
