@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -Eeuxo pipefail
+set -Eeu -o pipefail
 
 # R package checks
 # Updated 2019-07-31.
@@ -9,6 +9,8 @@ set -Eeuxo pipefail
 # - R CMD check --help
 # - Travis CI recipe
 #   https://github.com/travis-ci/travis-build/blob/master/lib/travis/build/script/r.rb
+
+SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)"
 
 # Don't require suggested packages to be installed.
 export _R_CHECK_FORCE_SUGGESTS_=false
@@ -28,7 +30,7 @@ Rscript -e "sessioninfo::session_info()"
 echo "travis_fold:end:session_info"
 
 echo "travis_fold:start:lints"
-./lints.R
+"${SOURCE_DIR}/lints"
 echo "travis_fold:end:lints"
 
 echo "travis_fold:start:r_cmd_check"
@@ -54,5 +56,5 @@ echo "travis_fold:end:bioc_check"
 rm "$PKG_TARBALL"
 
 echo "travis_fold:start:coverage"
-./coverage.R
+"${SOURCE_DIR}/coverage"
 echo "travis_fold:end:coverage"
