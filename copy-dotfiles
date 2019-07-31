@@ -10,4 +10,4 @@ then
     exit 1
 fi
 
-cp -n .Rcheck/.{Rbuildignore,gitignore,lintr} .
+cp -nv .Rcheck/.{Rbuildignore,gitignore,lintr} .
