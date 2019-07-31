@@ -1,3 +1,3 @@
-# R CI check scripts
+# R check
 
-These scripts are intended for Dockerized continuous integration tests.
+Scripts for Dockerized continuous integration tests.
