@@ -22,4 +22,4 @@ docker run -ti \
     --volume="${PWD}:/work" \
     --workdir="/work" \
     "$image" \
-    "${source_dir}/check"
+    "${source_dir}/run-checks"
