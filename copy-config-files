@@ -2,7 +2,7 @@
 set -Eeu -o pipefail
 
 # Copy configuration files.
-# Updated 2019-07-31.
+# Updated 2019-08-01.
 
 if [[ ! -d ".Rcheck" ]]
 then
@@ -21,5 +21,10 @@ files=(
 
 for file in "${files[@]}"
 do
-    cp -nv ".Rcheck/${file}" .
+    if [[ ! -f "$file" ]]
+    then
+        cp -nv ".Rcheck/${file}" .
+    else
+        echo "$file"
+    fi
 done
