@@ -2,10 +2,11 @@
 set -Eeu -o pipefail
 
 # R CMD CHECK
-# Updated 2019-07-31.
+# Updated 2019-08-07.
 
 # Set `--as-cran` flag for extra verbose incoming package checks.
 
 R CMD build . --no-build-vignettes --no-manual
+# Install the package, to avoid unexpected covr check issues.
 R CMD INSTALL "$PKG_TARBALL"
 R CMD check "$PKG_TARBALL" --ignore-vignettes --no-manual --timings
