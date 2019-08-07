@@ -7,4 +7,5 @@ set -Eeu -o pipefail
 # Set `--as-cran` flag for extra verbose incoming package checks.
 
 R CMD build . --no-build-vignettes --no-manual
+R CMD INSTALL "$PKG_TARBALL"
 R CMD check "$PKG_TARBALL" --ignore-vignettes --no-manual --timings
