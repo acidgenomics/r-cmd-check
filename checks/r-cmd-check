@@ -2,11 +2,28 @@
 set -Eeu -o pipefail
 
 # R CMD CHECK
-# Updated 2019-08-07.
+# Updated 2019-08-12.
 
-# Set `--as-cran` flag for extra verbose incoming package checks.
+# See also:
+# - https://github.com/travis-ci/travis-build/blob/master/lib/travis/build/script/r.rb
 
+# Ensure package library is up-to-date.
+Rscript -e << EOF
+if (!requireNamespace("BiocManager", quietly = TRUE) {
+    install.packages("BiocManager")
+}
+BiocManager::install(update = TRUE, ask = FALSE)
+if (!requireNamespace("remotes", quietly = TRUE) {
+    install.packages("remotes")
+}
+remotes::update_packages(upgrade = "always")
+EOF
+
+# Build the tarball.
 R CMD build . --no-build-vignettes --no-manual
+
 # Install the package, to avoid unexpected covr check issues.
 R CMD INSTALL "$PKG_TARBALL"
-R CMD check "$PKG_TARBALL" --ignore-vignettes --no-manual --timings
+
+# Set `--as-cran` flag for extra verbose incoming package checks.
+R CMD check "$PKG_TARBALL" --as-cran --ignore-vignettes --no-manual --timings
