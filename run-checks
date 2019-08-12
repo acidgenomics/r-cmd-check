@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -Eeux -o pipefail
+set -Eeu -o pipefail
 
 # R package checks
 # Updated 2019-07-31.
