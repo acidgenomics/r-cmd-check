@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -Eeu -o pipefail
+set -Eeux -o pipefail
 
 # R package checks
 # Updated 2019-07-31.
@@ -40,6 +40,11 @@ travis_fold start session-info
 echo "Session information"
 "${checks_dir}/session-info"
 travis_fold end session-info
+
+travis_fold start update-packages
+echo "Update packages"
+"${checks_dir}/update-packages"
+travis_fold end update-packages
 
 travis_fold start lints
 echo "Lints"

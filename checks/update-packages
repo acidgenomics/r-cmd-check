@@ -1,0 +1,14 @@
+#!/usr/bin/env Rscript
+
+## Update packages.
+## Updated 2019-08-12.
+
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+}
+BiocManager::install(update = TRUE, ask = FALSE)
+
+if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes")
+}
+remotes::update_packages(upgrade = "always")
