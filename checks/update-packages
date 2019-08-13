@@ -9,6 +9,7 @@
 ## > BiocManager::install(update = TRUE, ask = FALSE)
 
 ## Checking for `GITHUB_PAT` here because travis-ci.org doesn't export it.
+## Remember to pass any of these variables in docker run-image call.
 if (
     isTRUE(nzchar(Sys.getenv("CI"))) &&
     isTRUE(nzchar(Sys.getenv("GITHUB_PAT")))
