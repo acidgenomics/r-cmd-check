@@ -20,6 +20,7 @@ workdir="/Rcheck"
 docker pull "$image"
 docker run \
     -it \
+    -e CI="${CI:-}" \
     -e GITHUB_PAT="${GITHUB_PAT:-}" \
     --volume="${PWD}:${workdir}" \
     --workdir="${workdir}" \
