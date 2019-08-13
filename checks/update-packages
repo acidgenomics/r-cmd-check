@@ -13,9 +13,12 @@ if (
     isTRUE(nzchar(Sys.getenv("CI"))) &&
     isTRUE(nzchar(Sys.getenv("GITHUB_PAT")))
 ) {
+    message("Updating packages.")
     if (!requireNamespace("remotes", quietly = TRUE)) {
         install.packages("remotes")
     }
     remotes::update_packages(upgrade = "always")
+} else {
+    message("Skipping package updates.")
 }
 
