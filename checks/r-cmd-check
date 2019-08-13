@@ -15,3 +15,6 @@ R CMD INSTALL "$PKG_TARBALL"
 
 # Set `--as-cran` flag for extra verbose incoming package checks.
 R CMD check "$PKG_TARBALL" --ignore-vignettes --no-manual --timings
+
+# Remove `*.Rcheck` directory on success.
+rm -fr "${PKG_NAME}.Rcheck"
