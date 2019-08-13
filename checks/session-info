@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-## Session information
+## Session information.
 ## Updated 2019-07-31.
 
 utils::sessionInfo()

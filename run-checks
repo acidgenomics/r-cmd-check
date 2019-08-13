@@ -41,6 +41,11 @@ echo "Session information"
 "${checks_dir}/session-info"
 travis_fold end session-info
 
+travis_fold start update-packages
+echo "Update packages"
+"${checks_dir}/update-packages"
+travis_fold end update-packages
+
 travis_fold start lints
 echo "Lints"
 "${checks_dir}/lints"
