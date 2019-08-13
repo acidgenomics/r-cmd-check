@@ -21,5 +21,9 @@ files=(
 
 for file in "${files[@]}"
 do
-    cp -nv ".Rcheck/${file}" .
+    echo "$file"
+    if [[ ! -f "$file" ]]
+    then
+        cp -nv ".Rcheck/${file}" .
+    fi
 done
