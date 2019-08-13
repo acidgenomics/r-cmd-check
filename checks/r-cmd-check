@@ -14,4 +14,4 @@ R CMD build . --no-build-vignettes --no-manual
 R CMD INSTALL "$PKG_TARBALL"
 
 # Set `--as-cran` flag for extra verbose incoming package checks.
-R CMD check "$PKG_TARBALL" --as-cran --ignore-vignettes --no-manual --timings
+R CMD check "$PKG_TARBALL" --ignore-vignettes --no-manual --timings
