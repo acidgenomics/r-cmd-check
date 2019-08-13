@@ -1,14 +1,20 @@
 #!/usr/bin/env Rscript
 
 ## Update packages.
-## Updated 2019-08-12.
+## Updated 2019-08-13.
 
 ## > if (!requireNamespace("BiocManager", quietly = TRUE)) {
 ## >     install.packages("BiocManager")
 ## > }
 ## > BiocManager::install(update = TRUE, ask = FALSE)
 
-if (!requireNamespace("remotes", quietly = TRUE)) {
-    install.packages("remotes")
+## Checking for `GITHUB_PAT` here because travis-ci.org doesn't export it.
+if (isTRUE(nzchar(Sys.getenv("GITHUB_PAT")))) {
+    if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes")
+    }
+    remotes::update_packages(upgrade = "always")
+} else {
+    message("Failed to detect 'GITHUB_PAT' environment variable.")
 }
-remotes::update_packages(upgrade = "always")
+
