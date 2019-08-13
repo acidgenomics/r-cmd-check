@@ -10,14 +10,12 @@
 
 ## Checking for `GITHUB_PAT` here because travis-ci.org doesn't export it.
 if (
-    isTRUE(nzchar(Sys.getenv("TRAVIS"))) &&
-    isTRUE(nzchar(Sys.getenv("GITHUB_PAT")))
+    isTRUE(nzchar(Sys.getenv("GITHUB_PAT"))) &&
+    isTRUE(nzchar(Sys.getenv("TRAVIS")))
 ) {
     if (!requireNamespace("remotes", quietly = TRUE)) {
         install.packages("remotes")
     }
     remotes::update_packages(upgrade = "always")
-} else {
-    message("Failed to detect 'GITHUB_PAT' environment variable.")
 }
 
