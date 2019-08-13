@@ -9,7 +9,10 @@
 ## > BiocManager::install(update = TRUE, ask = FALSE)
 
 ## Checking for `GITHUB_PAT` here because travis-ci.org doesn't export it.
-if (isTRUE(nzchar(Sys.getenv("GITHUB_PAT")))) {
+if (
+    isTRUE(nzchar(Sys.getenv("TRAVIS"))) &&
+    isTRUE(nzchar(Sys.getenv("GITHUB_PAT")))
+) {
     if (!requireNamespace("remotes", quietly = TRUE)) {
         install.packages("remotes")
     }
