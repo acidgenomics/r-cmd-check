@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-## Update packages.
+## Update dependencies.
 ## Updated 2019-08-13.
 
 ## > if (!requireNamespace("BiocManager", quietly = TRUE)) {
@@ -17,5 +17,8 @@ if (
     if (!requireNamespace("remotes", quietly = TRUE)) {
         install.packages("remotes")
     }
-    remotes::update_packages(upgrade = "always")
+    if (!requireNamespace("bb8", quietly = TRUE)) {
+        remotes::install_github("acidgenomics/bb8", upgrade = "never")
+    }
+    bb8::updateDeps()
 }

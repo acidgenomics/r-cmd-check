@@ -2,7 +2,7 @@
 set -Eeu -o pipefail
 
 # R package checks
-# Updated 2019-07-31.
+# Updated 2019-08-13.
 #
 # See also:
 # - R CMD build --help
@@ -46,10 +46,10 @@ echo "Lints"
 "${checks_dir}/lints"
 travis_fold end lints
 
-travis_fold start update-packages
-echo "Update packages"
-"${checks_dir}/update-packages"
-travis_fold end update-packages
+travis_fold start update-deps
+echo "Update dependencies"
+"${checks_dir}/update-deps"
+travis_fold end update-deps
 
 travis_fold start r-cmd-check
 echo "R CMD CHECK"
