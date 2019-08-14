@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -Eeu -o pipefail
 
 # BiocCheck
 # Updated 2019-07-31.

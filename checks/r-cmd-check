@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -Eeu -o pipefail
 
 # R CMD CHECK
 # Updated 2019-08-12.

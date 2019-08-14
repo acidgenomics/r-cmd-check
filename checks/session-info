@@ -3,5 +3,10 @@
 ## Session information.
 ## Updated 2019-07-31.
 
+options(
+    error = quote(quit(status = 1L)),
+    warning = quote(quit(status = 1L))
+)
+
 utils::sessionInfo()
 sessioninfo::session_info()

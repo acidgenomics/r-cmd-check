@@ -3,10 +3,10 @@
 ## Update dependencies.
 ## Updated 2019-08-13.
 
-## > if (!requireNamespace("BiocManager", quietly = TRUE)) {
-## >     install.packages("BiocManager")
-## > }
-## > BiocManager::install(update = TRUE, ask = FALSE)
+options(
+    error = quote(quit(status = 1L)),
+    warning = quote(quit(status = 1L))
+)
 
 ## Checking for `GITHUB_PAT` here because travis-ci.org doesn't export it.
 ## Remember to pass any of these variables in docker run-image call.
