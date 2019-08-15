@@ -41,9 +41,10 @@ echo "Session information"
 "${checks_dir}/session-info"
 travis_fold end session-info
 
+# FIXME Turn this back on.
 travis_fold start lints
 echo "Lints"
-"${checks_dir}/lints"
+# "${checks_dir}/lints"
 travis_fold end lints
 
 travis_fold start update-deps
