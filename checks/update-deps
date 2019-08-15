@@ -22,4 +22,6 @@ if (
     }
     message("Updating dependencies.")
     bb8::updateDeps()
+} else {
+    message("Skipping dependency updates.")
 }
