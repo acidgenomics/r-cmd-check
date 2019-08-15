@@ -21,7 +21,7 @@ if (
     if (!requireNamespace("bb8", quietly = TRUE)) {
         remotes::install_github("acidgenomics/bb8", upgrade = "always")
     }
-    bb8::updateDeps()
+    bb8::updateDeps(verbose = TRUE)
 } else {
     message("Skipping dependency updates.")
 }
