@@ -19,7 +19,7 @@ if (
         install.packages("remotes")
     }
     if (!requireNamespace("bb8", quietly = TRUE)) {
-        remotes::install_github("acidgenomics/bb8", upgrade = "never")
+        remotes::install_github("acidgenomics/bb8", upgrade = "always")
     }
     bb8::updateDeps()
 } else {
