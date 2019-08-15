@@ -14,13 +14,13 @@ if (
     isTRUE(nzchar(Sys.getenv("CI"))) &&
     isTRUE(nzchar(Sys.getenv("GITHUB_PAT")))
 ) {
+    message("Updating dependencies using 'bb8::updateDeps()'.")
     if (!requireNamespace("remotes", quietly = TRUE)) {
         install.packages("remotes")
     }
     if (!requireNamespace("bb8", quietly = TRUE)) {
         remotes::install_github("acidgenomics/bb8", upgrade = "never")
     }
-    message("Updating dependencies.")
     bb8::updateDeps()
 } else {
     message("Skipping dependency updates.")
