@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 ## Update dependencies.
-## Updated 2019-08-13.
+## Updated 2019-08-15.
 
 options(
     error = quote(quit(status = 1L)),
@@ -21,7 +21,7 @@ if (
     if (!requireNamespace("bb8", quietly = TRUE)) {
         remotes::install_github("acidgenomics/bb8", upgrade = "never")
     }
-    bb8::updateDeps(verbose = TRUE)
+    bb8::updateDeps()
 } else {
     message("Skipping dependency updates.")
 }
