@@ -8,7 +8,9 @@ options(
     warning = quote(quit(status = 1L))
 )
 
-requireNamespace("lintr", quietly = TRUE)
+if (!requireNamespace("lintr", quietly = TRUE)) {
+    install.packages("lintr")
+}
 
 lints <- lintr::lint_package(path = ".")
 
