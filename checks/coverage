@@ -13,7 +13,9 @@ if (!dir.exists("tests")) {
     quit()
 }
 
-stopifnot(requireNamespace("covr", quietly = TRUE))
+if (!requireNamespace("covr", quietly = TRUE)) {
+    remotes::install_github("acidgenomics/covr", upgrade = "never")
+}
 
 cov <- covr::package_coverage()
 pct <- covr::percent_coverage(cov)
