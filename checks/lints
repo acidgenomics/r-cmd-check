@@ -1,16 +1,18 @@
 #!/usr/bin/env Rscript
 
 ## Check package lints with lintr.
-## Updated 2019-07-31.
+## Updated 2019-09-13.
 
 options(
     error = quote(quit(status = 1L)),
     warning = quote(quit(status = 1L))
 )
 
-if (!requireNamespace("lintr", quietly = TRUE)) {
-    install.packages("lintr")
-}
+## > if (!requireNamespace("lintr", quietly = TRUE)) {
+## >     install.packages("lintr")
+## > }
+
+remotes::install_github(repo = "acidgenomics/lintr", upgrade = "never")
 
 lints <- lintr::lint_package(path = ".")
 
