@@ -24,7 +24,7 @@ if (length(lints) > 0L) {
     message(sprintf(
         fmt = "%d %s detected.",
         length(lints),
-        ngettext(length(lints), "lint", "lints")
+        ngettext(n = length(lints), msg1 = "lint", msg2 = "lints")
     ))
     ## > print(lints)
     ## > stop("Package failed lintr checks.")
