@@ -8,11 +8,9 @@ options(
     warning = quote(quit(status = 1L))
 )
 
-## > if (!requireNamespace("lintr", quietly = TRUE)) {
-## >     install.packages("lintr")
-## > }
-
-remotes::install_github(repo = "acidgenomics/lintr", upgrade = "never")
+if (!requireNamespace("lintr", quietly = TRUE)) {
+    install.packages("lintr")
+}
 
 library(lintr)
 lints <- lint_package(path = ".")
