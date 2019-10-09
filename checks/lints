@@ -1,14 +1,17 @@
 #!/usr/bin/env Rscript
 
 ## Check package lints with lintr.
-## Updated 2019-09-18.
+## Updated 2019-10-09.
 
 options(
     error = quote(quit(status = 1L)),
     warning = quote(quit(status = 1L))
 )
 
-if (!requireNamespace("lintr", quietly = TRUE)) {
+if (
+    !requireNamespace("lintr", quietly = TRUE) ||
+    packageVersion("lintr") < "2.0.0"
+) {
     install.packages("lintr")
 }
 
