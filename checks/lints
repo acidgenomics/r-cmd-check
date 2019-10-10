@@ -12,8 +12,7 @@ if (
     !requireNamespace("lintr", quietly = TRUE) ||
     packageVersion("lintr") < "2.0.0"
 ) {
-    ## > remove.packages("lintr")
-    install.packages("lintr")
+    stop("Docker image is missing lintr v2+.")
 }
 
 library(lintr)
