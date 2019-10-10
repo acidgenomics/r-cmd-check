@@ -2,7 +2,7 @@
 set -Eeu -o pipefail
 
 # BiocCheck
-# Updated 2019-10-09.
+# Updated 2019-10-10.
 
 # Run 'BiocCheck::usage()' for options.
 # Set '--new-package' flag for extra verbose new package checks.
@@ -15,6 +15,7 @@ Rscript -e " \
         package = \"${PKG_TARBALL}\", \
         \`no-check-R-ver\` = TRUE, \
         \`no-check-bioc-help\` = TRUE, \
+        \`no-check-coding-practices\` = TRUE,
         \`no-check-remotes\` = TRUE, \
         \`no-check-version-num\` = TRUE, \
         \`no-check-vignettes\` = TRUE, \
