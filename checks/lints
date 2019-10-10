@@ -12,6 +12,7 @@ if (
     !requireNamespace("lintr", quietly = TRUE) ||
     packageVersion("lintr") < "2.0.0"
 ) {
+    remove.packages("lintr")
     install.packages("lintr")
 }
 
