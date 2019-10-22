@@ -56,10 +56,14 @@ echo "R CMD CHECK"
 "${checks_dir}/r-cmd-check"
 travis_fold end r-cmd-check
 
-travis_fold start bioc-check
-echo "BiocCheck"
-"${checks_dir}/bioc-check"
-travis_fold end bioc-check
+# Only run BiocCheck if we detect biocViews.
+if grep -q "biocViews" DESCRIPTION
+then
+    travis_fold start bioc-check
+    echo "BiocCheck"
+    "${checks_dir}/bioc-check"
+    travis_fold end bioc-check
+fi
 
 travis_fold start coverage
 echo "Coverage"

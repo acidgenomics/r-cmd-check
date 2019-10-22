@@ -15,8 +15,8 @@ files=(
     ".gitignore"
     ".lintr"
     ".travis.yml"
-    "appveyor.yml"
     "_pkgdown.yml"
+    "appveyor.yml"
 )
 
 for file in "${files[@]}"
