@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -Eeu -o pipefail
 
-# R package checks
-# Updated 2019-08-15.
+# Run R package checks.
+# Updated 2019-10-22.
 
 # See also:
 # - R CMD build --help
@@ -56,7 +56,7 @@ echo "R CMD CHECK"
 "${checks_dir}/r-cmd-check"
 travis_fold end r-cmd-check
 
-# Only run BiocCheck if we detect biocViews.
+# Only run BiocCheck for Bioconductor packages.
 if grep -q "biocViews" DESCRIPTION
 then
     travis_fold start bioc-check
