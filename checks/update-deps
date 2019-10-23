@@ -3,45 +3,50 @@
 ## Update dependencies.
 ## Updated 2019-10-23.
 
+## Internal error -3 can happen when you use `install_github()` to install a
+## package that's currently loaded.
+
 options(
     error = quote(quit(status = 1L)),
     warning = quote(quit(status = 1L))
 )
 
-## Checking for `GITHUB_PAT` here because travis-ci.org doesn't export it.
-## Remember to pass any of these variables in docker run-image call.
+getCurrentVersion <- function(repo) {
+    x <- readLines(paste0("https://github.com/", repo, "/releases/latest"))
+    x <- grep(
+        pattern = "v[.0-9]+.tar.gz",
+        x = x,
+        value = TRUE
+    )
+    x <- gsub(
+        pattern = "^.+\\bv([.0-9]+).tar.gz\\b.+$",
+        replacement = "\\1",
+        x = x
+    )
+    x <- package_version(x)
+    x
+}
+
+isInstalled <- function(pkg) {
+    stopifnot(requireNamespace("utils", quietly = TRUE))
+    pkg %in% rownames(utils::installed.packages())
+}
+
 if (
     isTRUE(nzchar(Sys.getenv("CI"))) &&
     isTRUE(nzchar(Sys.getenv("GITHUB_PAT")))
 ) {
-    message("Updating dependencies using 'bb8::updateDeps()'.")
-    if (!requireNamespace("remotes", quietly = TRUE)) {
+    if (!isInstalled("remotes")) {
+        message("Installing remotes.")
         install.packages("remotes")
-    }
-    getCurrentVersion <- function(repo) {
-        x <- readLines(paste0("https://github.com/", repo, "/releases/latest"))
-        x <- grep(
-            pattern = "v[.0-9]+.tar.gz",
-            x = x,
-            value = TRUE
-        )
-        x <- gsub(
-            pattern = "^.+\\bv([.0-9]+).tar.gz\\b.+$",
-            replacement = "\\1",
-            x = x
-        )
-        x <- package_version(x)
-        x
     }
     repo <- "acidgenomics/bb8"
     current <- getCurrentVersion(repo)
-    if (
-        !requireNamespace("bb8", quietly = TRUE) ||
-        packageVersion("bb8") < current
-    ) {
+    if (!isInstalled("bb8") || packageVersion("bb8") < current) {
         message("Installing bb8.")
         remotes::install_github(repo, upgrade = "never")
     }
+    message("Updating dependencies using 'bb8::updateDeps()'.")
     bb8::updateDeps()
 } else {
     message("Skipping dependency updates.")
