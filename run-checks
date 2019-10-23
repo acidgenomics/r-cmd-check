@@ -2,7 +2,7 @@
 set -Eeu -o pipefail
 
 # Run R package checks.
-# Updated 2019-10-22.
+# Updated 2019-10-23.
 
 # See also:
 # - R CMD build --help
@@ -15,6 +15,9 @@ checks_dir="${source_dir}/checks"
 
 # Don't require suggested packages to be installed.
 export _R_CHECK_FORCE_SUGGESTS_=false
+
+# Only enable automatic upgrades when building the Docker images.
+export R_REMOTES_UPGRADE="never"
 
 # Bug fix for `Sys.timezone()` when `timedatectl` is installed.
 # https://github.com/rocker-org/rocker-versioned/issues/89
