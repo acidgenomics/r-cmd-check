@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
-set -Eeuxo pipefail
+set -Eeu -o pipefail
 
 # Docker failure return.
-# Updated 2019-07-31.
+# Updated 2019-10-23.
 
 env | sort
 df -h | sort
 ls -al
 docker images
-docker system prune --all --force
-docker images
-df -h | sort
+
+# > docker system prune --all --force
+# > docker images
+# > df -h | sort
