@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 ## Update dependencies.
-## Updated 2019-08-15.
+## Updated 2019-10-23.
 
 options(
     error = quote(quit(status = 1L)),
@@ -18,8 +18,29 @@ if (
     if (!requireNamespace("remotes", quietly = TRUE)) {
         install.packages("remotes")
     }
-    if (!requireNamespace("bb8", quietly = TRUE)) {
-        remotes::install_github("acidgenomics/bb8", upgrade = "never")
+    getCurrentVersion <- function(repo) {
+        x <- readLines(paste0("https://github.com/", repo, "/releases/latest"))
+        x <- grep(
+            pattern = "v[.0-9]+.tar.gz",
+            x = x,
+            value = TRUE
+        )
+        x <- gsub(
+            pattern = "^.+\\bv([.0-9]+).tar.gz\\b.+$",
+            replacement = "\\1",
+            x = x
+        )
+        x <- package_version(x)
+        x
+    }
+    repo <- "acidgenomics/bb8"
+    current <- getCurrentVersion(repo)
+    if (
+        !requireNamespace("bb8", quietly = TRUE) ||
+        packageVersion("bb8") < current
+    ) {
+        message("Installing bb8.")
+        remotes::install_github(repo, upgrade = "never")
     }
     bb8::updateDeps()
 } else {
