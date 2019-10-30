@@ -2,7 +2,7 @@
 set -Eeu -o pipefail
 
 # Run R package checks.
-# Updated 2019-10-23.
+# Updated 2019-10-30.
 
 # See also:
 # - R CMD build --help
@@ -14,7 +14,10 @@ source_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)"
 checks_dir="${source_dir}/checks"
 
 # Don't require suggested packages to be installed.
-export _R_CHECK_FORCE_SUGGESTS_=false
+if [[ -z "${_R_CHECK_FORCE_SUGGESTS:-}" ]]
+then
+    export _R_CHECK_FORCE_SUGGESTS_=false
+fi
 
 # Only enable automatic upgrades when building the Docker images.
 export R_REMOTES_UPGRADE="never"
