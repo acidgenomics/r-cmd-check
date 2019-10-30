@@ -59,10 +59,13 @@ echo "Lints"
 "${checks_dir}/lints"
 travis_fold end lints
 
-travis_fold start update-deps
-echo "Update dependencies"
-"${checks_dir}/update-deps"
-travis_fold end update-deps
+if [[ -z "${RSCRIPT_SKIP_UPDATE}" ]]
+then
+    travis_fold start update-deps
+    echo "Update dependencies"
+    "${checks_dir}/update-deps"
+    travis_fold end update-deps
+fi
 
 travis_fold start r-cmd-check
 echo "R CMD CHECK"
