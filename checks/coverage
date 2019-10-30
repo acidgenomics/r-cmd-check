@@ -22,7 +22,7 @@ pct <- covr::percent_coverage(cov)
 
 print(cov)
 
-if (isTRUE(nzchar("RSCRIPT_KEEP_IT_100"))) {
+if (isTRUE(nzchar("RCHECK_KEEP_IT_100"))) {
     message("Requiring 100% coverage.")
     if (pct < 100L) {
         stop(sprintf("Coverage is %s%%.", round(pct, digits = 2L)))

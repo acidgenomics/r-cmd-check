@@ -59,7 +59,7 @@ echo "Lints"
 "${checks_dir}/lints"
 travis_fold end lints
 
-if [[ -z "${RSCRIPT_SKIP_UPDATE}" ]]
+if [[ -z "${RCHECK_SKIP_UPDATE}" ]]
 then
     travis_fold start update-deps
     echo "Update dependencies"
