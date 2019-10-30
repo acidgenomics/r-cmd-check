@@ -8,7 +8,8 @@ set -Eeu -o pipefail
 # - R CMD build --help
 # - R CMD check --help
 # - Travis CI recipe
-#   https://github.com/travis-ci/travis-build/blob/master/lib/travis/build/script/r.rb
+#   https://github.com/travis-ci/travis-build/blob/master/lib/travis/build/
+#       script/r.rb
 
 source_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)"
 checks_dir="${source_dir}/checks"
@@ -20,13 +21,19 @@ then
 fi
 
 # Only enable automatic upgrades when building the Docker images.
-export R_REMOTES_UPGRADE="never"
+if [[ -z "${R_REMOTES_UPGRADE:-}" ]]
+then
+    export R_REMOTES_UPGRADE="never"
+fi
 
-# Bug fix for `Sys.timezone()` when `timedatectl` is installed.
+# Bug fix for 'Sys.timezone()' when timedatectl is installed.
 # https://github.com/rocker-org/rocker-versioned/issues/89
-export TZ="America/New_York"
+if [[ -z "${TZ:-}" ]]
+then
+    export TZ="America/New_York"
+fi
 
-# Get the package version and define the `R CMD build` tarball output.
+# Get the package version and define the 'R CMD build' tarball output.
 PKG_NAME="$(grep -E "^Package:" DESCRIPTION | cut -d ' ' -f 2)"
 export PKG_NAME
 
