@@ -2,11 +2,11 @@
 set -Eeu -o pipefail
 
 # Run dockerized R package checks.
-# Updated 2019-10-30.
+# Updated 2019-11-01.
 
 if [[ -z "${image:-}" ]]
 then
-    image="basejump"
+    image="acidgenomics/basejump"
 fi
 
 if [[ -z "${tag:-}" ]]
@@ -14,7 +14,7 @@ then
     tag="latest"
 fi
 
-image="acidgenomics/${image}:${tag}"
+image="${image}:${tag}"
 workdir="/Rcheck"
 
 docker pull "$image"
