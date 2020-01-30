@@ -2,7 +2,7 @@
 set -Eeu -o pipefail
 
 # Run R package checks.
-# Updated 2019-10-30.
+# Updated 2020-01-30.
 
 # See also:
 # - R CMD build --help
@@ -81,9 +81,12 @@ then
     travis_fold end bioc-check
 fi
 
-travis_fold start coverage
-echo "Coverage"
-"${checks_dir}/coverage"
-travis_fold end coverage
+if [[ -z "${RCHECK_SKIP_COVERAGE:-}" ]]
+then
+    travis_fold start coverage
+    echo "Coverage"
+    "${checks_dir}/coverage"
+    travis_fold end coverage
+fi
 
 rm "$PKG_TARBALL"
