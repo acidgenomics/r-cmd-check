@@ -81,12 +81,13 @@ then
     travis_fold end bioc-check
 fi
 
-if [[ -z "${RCHECK_SKIP_COVERAGE:-}" ]]
-then
-    travis_fold start coverage
-    echo "Coverage"
-    "${checks_dir}/coverage"
-    travis_fold end coverage
-fi
+# Run code coverage with covr by default.
+# > if [[ -z "${RCHECK_SKIP_COVERAGE:-}" ]]
+# > then
+# >     travis_fold start coverage
+# >     echo "Coverage"
+# >     "${checks_dir}/coverage"
+# >     travis_fold end coverage
+# > fi
 
 rm "$PKG_TARBALL"
