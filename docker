@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -Eeu -o pipefail
 
+# """
 # Run dockerized R package checks.
 # Updated 2020-01-30.
+# """
 
 if [[ -z "${image:-}" ]]
 then
