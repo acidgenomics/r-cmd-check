@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -Eeu -o pipefail
 
+# """
 # Docker failure return.
 # Updated 2019-10-23.
+# """
 
 env | sort
 df -h | sort
