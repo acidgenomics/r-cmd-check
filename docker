@@ -23,6 +23,7 @@ docker pull "$image"
 docker run \
     -it \
     -e CI="${CI:-}" \
+    -e CRAN="${CRAN:-}" \
     -e GITHUB_PAT="${GITHUB_PAT:-}" \
     -e RCHECK_KEEP_IT_100="${RCHECK_KEEP_IT_100:-}" \
     -e RCHECK_SKIP_COVERAGE="${RCHECK_SKIP_COVERAGE:-}" \
