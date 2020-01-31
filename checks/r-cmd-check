@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 set -Eeu -o pipefail
 
+# """
 # R CMD CHECK
-# Updated 2019-08-12.
-
+# Updated 2020-01-31.
+#
 # See also:
 # - https://github.com/travis-ci/travis-build/blob/master/lib/travis/build/script/r.rb
 # - https://stackoverflow.com/questions/47127594
+# """
 
 # Build the tarball.
 R CMD build . --no-build-vignettes --no-manual
@@ -14,8 +16,16 @@ R CMD build . --no-build-vignettes --no-manual
 # Install the package, to avoid unexpected covr check issues.
 R CMD INSTALL "$PKG_TARBALL"
 
-# Set `--as-cran` flag for extra verbose incoming package checks.
-R CMD check "$PKG_TARBALL" --ignore-vignettes --no-manual --timings
+flags=(
+    "--ignore-vignettes"
+    "--no-manual"
+    "--timings"
+)
+if [[ -n "${CRAN:-}" ]]
+then
+    flags+=("--as-cran")
+fi
+R CMD check "$PKG_TARBALL" "${flags[@]}"
 
 # Remove `*.Rcheck` directory on success.
 rm -fr "${PKG_NAME}.Rcheck"
