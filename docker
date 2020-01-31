@@ -2,7 +2,7 @@
 set -Eeu -o pipefail
 
 # Run dockerized R package checks.
-# Updated 2019-11-01.
+# Updated 2020-01-30.
 
 if [[ -z "${image:-}" ]]
 then
@@ -23,6 +23,7 @@ docker run \
     -e CI="${CI:-}" \
     -e GITHUB_PAT="${GITHUB_PAT:-}" \
     -e RCHECK_KEEP_IT_100="${RCHECK_KEEP_IT_100:-}" \
+    -e RCHECK_SKIP_COVERAGE="${RCHECK_SKIP_COVERAGE:-}" \
     -e RCHECK_SKIP_UPDATE="${RCHECK_SKIP_UPDATE:-}" \
     --volume="${PWD}:${workdir}" \
     --workdir="${workdir}" \
