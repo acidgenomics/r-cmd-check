@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -Eeu -o pipefail
 
+# """
 # Copy configuration files.
 # Updated 2019-08-01.
+# """
 
 if [[ ! -d ".Rcheck" ]]
 then
