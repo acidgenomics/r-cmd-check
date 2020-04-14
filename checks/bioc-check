@@ -1,24 +1,31 @@
 #!/usr/bin/env bash
 set -Eeu -o pipefail
 
+# """
 # BiocCheck
-# Updated 2019-10-22.
-
+# Updated 2020-04-14.
+#
 # Run 'BiocCheck::usage()' for options.
 # Set '--new-package' flag for extra verbose new package checks.
-
+#
 # Note that running 'R CMD BiocCheck' directly requires 'script/BiocCheck' to
 # be installed at '/usr/lib64/R/bin'. Otherwise, can run directly using Rscript.
+#
+# @seealso
+# - http://master.bioconductor.org/packages/devel/bioc/vignettes/BiocCheck/
+#   inst/doc/BiocCheck.html
+# """
 
-Rscript -e "                                                                   \
-    BiocCheck::BiocCheck(                                                      \
-        package = \"${PKG_TARBALL}\",                                          \
-        \`no-check-R-ver\` = TRUE,                                             \
-        \`no-check-bioc-help\` = TRUE,                                         \
-        \`no-check-coding-practices\` = TRUE,                                  \
-        \`no-check-remotes\` = TRUE,                                           \
-        \`no-check-version-num\` = TRUE,                                       \
-        \`no-check-vignettes\` = TRUE,                                         \
-        \`quit-with-status\` = TRUE                                            \
-    )                                                                          \
+Rscript -e " \
+    BiocCheck::BiocCheck( \
+        package = \"${PKG_TARBALL}\", \
+        \`no-check-R-ver\` = TRUE, \
+        \`no-check-bioc-help\` = TRUE, \
+        \`no-check-coding-practices\` = TRUE, \
+        \`no-check-man-doc\` = TRUE, \
+        \`no-check-remotes\` = TRUE, \
+        \`no-check-version-num\` = TRUE, \
+        \`no-check-vignettes\` = TRUE, \
+        \`quit-with-status\` = TRUE \
+    ) \
 "
