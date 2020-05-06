@@ -3,10 +3,10 @@ set -Eeu -o pipefail
 
 # """
 # Run dockerized R package checks.
-# Updated 2020-03-07.
+# Updated 2020-05-06.
 # """
 
-[[ -z "${image:-}" ]] && image="acidgenomics/basejump"
+[[ -z "${image:-}" ]] && image="acidgenomics/r-basejump"
 [[ -z "${tag:-}" ]] && tag="latest"
 
 image="${image}:${tag}"
