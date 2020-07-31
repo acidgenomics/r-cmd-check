@@ -2,7 +2,7 @@
 
 # """
 ## Update dependencies.
-## Updated 2020-07-01.
+## Updated 2020-07-23.
 ##
 ## Internal error -3 can happen when you use `install_github()` to install a
 ## package that's currently loaded.
