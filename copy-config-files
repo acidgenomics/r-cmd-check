@@ -3,7 +3,7 @@ set -Eeu -o pipefail
 
 # """
 # Copy configuration files.
-# Updated 2019-08-01.
+# Updated 2020-10-07.
 # """
 
 if [[ ! -d ".Rcheck" ]]
@@ -18,7 +18,7 @@ files=(
     ".lintr"
     ".travis.yml"
     "_pkgdown.yml"
-    "appveyor.yml"
+    # "appveyor.yml"
 )
 
 for file in "${files[@]}"
