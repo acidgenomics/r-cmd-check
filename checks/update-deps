@@ -2,7 +2,7 @@
 
 # """
 ## Update dependencies.
-## Updated 2020-10-08.
+## Updated 2020-11-04.
 ## """
 
 options(
@@ -15,17 +15,15 @@ update_deps <- function() {
         stopifnot(requireNamespace("utils", quietly = TRUE))
         pkg %in% rownames(utils::installed.packages())
     }
-    if (!isInstalled("BiocManager")) {
-        install.packages("BiocManager")
-    }
-    if (!isInstalled("bb8")) {
-        install.packages(
-            pkgs = "bb8",
-            repos = c(
-                "r.acidgenomics.com",
-                BiocManager::repositories()
-            )
-        )
+    deps <- c("BiocManager", "bb8", "desc")
+    ok <- isInstalled(deps)
+    if (!all(ok)) {
+        fail <- deps[!ok]
+        message(sprintf(
+            "Can't update packages. Need dependencies: %s.",
+            toString(fail)
+        ))
+        return(invisible(FALSE))
     }
     message("Updating dependencies using 'bb8::updateDeps()'.")
     bb8::updateDeps()
