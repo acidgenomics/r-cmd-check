@@ -13,7 +13,7 @@ options(
 check_lints <- function() {
     stopifnot(
         requireNamespace("lintr"),
-        packageVersion("lintr") < "2.0.0"
+        packageVersion("lintr") >= "2.0.0"
     )
     lints <- lintr::lint_package(path = ".")
     ## Current print bug in lintr:
