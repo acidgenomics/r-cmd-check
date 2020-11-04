@@ -12,6 +12,6 @@ options(
 
 utils::sessionInfo()
 
-if (!requireNamespace("sessioninfo", quietly = TRUE)) {
+if (requireNamespace("sessioninfo", quietly = TRUE)) {
     sessioninfo::session_info()
 }
