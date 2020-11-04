@@ -10,24 +10,26 @@ options(
     warning = quote(quit(status = 1L))
 )
 
-isInstalled <- function(pkg) {
-    stopifnot(requireNamespace("utils", quietly = TRUE))
-    pkg %in% rownames(utils::installed.packages())
-}
-
-if (!isInstalled("BiocManager")) {
-    install.packages("BiocManager")
-}
-
-if (!isInstalled("bb8")) {
-    install.packages(
-        pkgs = "bb8",
-        repos = c(
-            "r.acidgenomics.com",
-            BiocManager::repositories()
+update_deps <- function() {
+    isInstalled <- function(pkg) {
+        stopifnot(requireNamespace("utils", quietly = TRUE))
+        pkg %in% rownames(utils::installed.packages())
+    }
+    if (!isInstalled("BiocManager")) {
+        install.packages("BiocManager")
+    }
+    if (!isInstalled("bb8")) {
+        install.packages(
+            pkgs = "bb8",
+            repos = c(
+                "r.acidgenomics.com",
+                BiocManager::repositories()
+            )
         )
-    )
+    }
+    message("Updating dependencies using 'bb8::updateDeps()'.")
+    bb8::updateDeps()
+    invisible(TRUE)
 }
 
-message("Updating dependencies using 'bb8::updateDeps()'.")
-bb8::updateDeps()
+update_deps()

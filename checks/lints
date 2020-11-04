@@ -1,32 +1,37 @@
 #!/usr/bin/env Rscript
 
+## """
 ## Check package lints with lintr.
-## Updated 2019-10-10.
+## Updated 2020-11-04.
+## """
 
 options(
     error = quote(quit(status = 1L)),
     warning = quote(quit(status = 1L))
 )
 
-if (
-    !requireNamespace("lintr", quietly = TRUE) ||
-    packageVersion("lintr") < "2.0.0"
-) {
-    stop("Docker image is missing lintr v2+.")
+check_lints <- function() {
+    if (
+        !requireNamespace("lintr", quietly = TRUE) ||
+        packageVersion("lintr") < "2.0.0"
+    ) {
+        message("lintr v2+ is not installed.")
+        return(invisible(FALSE))
+    }
+    stopifnot(requireNamespace("lintr"))
+    lints <- lintr::lint_package(path = ".")
+    ## Current print bug in lintr:
+    ## ## Error in httr::status_code(response) : object 'response' not found
+    ## ## Calls: print -> print.lints -> github_comment -> <Anonymous>
+    if (length(lints) > 0L) {
+        print(lints)
+        stop(sprintf(
+            fmt = "Package failed lintr checks. %d %s detected.",
+            length(lints),
+            ngettext(n = length(lints), msg1 = "lint", msg2 = "lints")
+        ))
+    }
+    invisible(TRUE)
 }
 
-library(lintr)
-lints <- lint_package(path = ".")
-
-## Current print bug in lintr:
-## ## Error in httr::status_code(response) : object 'response' not found
-## ## Calls: print -> print.lints -> github_comment -> <Anonymous>
-
-if (length(lints) > 0L) {
-    print(lints)
-    stop(sprintf(
-        fmt = "Package failed lintr checks. %d %s detected.",
-        length(lints),
-        ngettext(n = length(lints), msg1 = "lint", msg2 = "lints")
-    ))
-}
+check_lints()

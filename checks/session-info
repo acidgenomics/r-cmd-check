@@ -10,8 +10,12 @@ options(
     warning = quote(quit(status = 1L))
 )
 
-utils::sessionInfo()
-
-if (requireNamespace("sessioninfo", quietly = TRUE)) {
-    sessioninfo::session_info()
+session_info <- function() {
+    utils::sessionInfo()
+    if (requireNamespace("sessioninfo", quietly = TRUE)) {
+        sessioninfo::session_info()
+    }
+    invisible(TRUE)
 }
+
+session_info()

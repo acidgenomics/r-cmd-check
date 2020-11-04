@@ -1,9 +1,8 @@
-#!/usr/bin/env bash
-set -Eeu -o pipefail
+#!/usr/bin/env Rscript
 
 # """
 # BiocCheck
-# Updated 2020-04-14.
+# Updated 2020-11-04.
 #
 # Run 'BiocCheck::usage()' for options.
 # Set '--new-package' flag for extra verbose new package checks.
@@ -16,16 +15,27 @@ set -Eeu -o pipefail
 #   inst/doc/BiocCheck.html
 # """
 
-Rscript -e " \
+options(
+    error = quote(quit(status = 1L)),
+    warning = quote(quit(status = 1L))
+)
+
+bioc_check <- function() {
+    if (!requireNamespace("BiocCheck", quietly = TRUE)) {
+        return(invisible(FALSE))
+    }
+    stopifnot(requireNamespace("BiocCheck"))
     BiocCheck::BiocCheck( \
-        package = \"${PKG_TARBALL}\", \
-        \`no-check-R-ver\` = TRUE, \
-        \`no-check-bioc-help\` = TRUE, \
-        \`no-check-coding-practices\` = TRUE, \
-        \`no-check-man-doc\` = TRUE, \
-        \`no-check-remotes\` = TRUE, \
-        \`no-check-version-num\` = TRUE, \
-        \`no-check-vignettes\` = TRUE, \
-        \`quit-with-status\` = TRUE \
-    ) \
-"
+        package = Sys.getenv("PKG_TARBALL"),
+        `no-check-R-ver` = TRUE,
+        `no-check-bioc-help` = TRUE,
+        `no-check-coding-practices` = TRUE,
+        `no-check-man-doc` = TRUE,
+        `no-check-remotes` = TRUE,
+        `no-check-version-num` = TRUE,
+        `no-check-vignettes` = TRUE,
+        `quit-with-status` = TRUE
+    )
+}
+
+bioc_check()

@@ -1,31 +1,36 @@
 #!/usr/bin/env Rscript
 
+## """
 ## Check package coverage with covr.
-## Updated 2019-10-31.
+## Updated 2020-11-04.
+## """
 
 options(
     error = quote(quit(status = 1L)),
     warning = quote(quit(status = 1L))
 )
 
-if (!dir.exists("tests")) {
-    message("No unit tests defined in `tests/` directory.")
-    quit()
-}
-
-if (!requireNamespace("covr", quietly = TRUE)) {
-    remotes::install_github("acidgenomics/covr", upgrade = "never")
-}
-
-cov <- covr::package_coverage()
-pct <- covr::percent_coverage(cov)
-
-print(cov)
-
-if (isTRUE(nzchar(Sys.getenv("RCHECK_KEEP_IT_100")))) {
-    message("Requiring 100% coverage.")
-    ## covr sometimes reports 99.8% coverage instead of 100%.
-    if (pct < 99L) {
-        stop(sprintf("Coverage is %s%%.", round(pct, digits = 2L)))
+check_coverage <- function() {
+    if (!dir.exists("tests")) {
+        message("No unit tests defined in `tests/` directory.")
+        return(invisible(FALSE))
     }
+    if (!requireNamespace("covr", quietly = TRUE)) {
+        message("covr package is not installed.")
+        return(invisible(FALSE))
+    }
+    stopifnot(requireNamespace("covr"))
+    cov <- covr::package_coverage()
+    pct <- covr::percent_coverage(cov)
+    print(cov)
+    if (isTRUE(nzchar(Sys.getenv("RCHECK_KEEP_IT_100")))) {
+        message("Requiring 100% coverage.")
+        ## covr sometimes reports 99.8% coverage instead of 100%.
+        if (pct < 99L) {
+            stop(sprintf("Coverage is %s%%.", round(pct, digits = 2L)))
+        }
+    }
+    invisible(TRUE)
 }
+
+check_coverage()
