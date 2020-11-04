@@ -11,14 +11,10 @@ options(
 )
 
 check_lints <- function() {
-    if (
-        !requireNamespace("lintr", quietly = TRUE) ||
+    stopifnot(
+        requireNamespace("lintr"),
         packageVersion("lintr") < "2.0.0"
-    ) {
-        message("lintr v2+ is not installed.")
-        return(invisible(FALSE))
-    }
-    stopifnot(requireNamespace("lintr"))
+    )
     lints <- lintr::lint_package(path = ".")
     ## Current print bug in lintr:
     ## ## Error in httr::status_code(response) : object 'response' not found

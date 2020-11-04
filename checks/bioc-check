@@ -21,9 +21,6 @@ options(
 )
 
 bioc_check <- function() {
-    if (!requireNamespace("BiocCheck", quietly = TRUE)) {
-        return(invisible(FALSE))
-    }
     stopifnot(requireNamespace("BiocCheck"))
     BiocCheck::BiocCheck( \
         package = Sys.getenv("PKG_TARBALL"),

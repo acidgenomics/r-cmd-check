@@ -15,10 +15,6 @@ check_coverage <- function() {
         message("No unit tests defined in `tests/` directory.")
         return(invisible(FALSE))
     }
-    if (!requireNamespace("covr", quietly = TRUE)) {
-        message("covr package is not installed.")
-        return(invisible(FALSE))
-    }
     stopifnot(requireNamespace("covr"))
     cov <- covr::package_coverage()
     pct <- covr::percent_coverage(cov)

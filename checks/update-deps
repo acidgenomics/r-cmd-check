@@ -20,7 +20,7 @@ update_deps <- function() {
     if (!all(ok)) {
         fail <- deps[!ok]
         message(sprintf(
-            "Can't update packages. Need dependencies: %s.",
+            "Can't update packages. Missing dependencies: %s.",
             toString(fail)
         ))
         return(invisible(FALSE))
