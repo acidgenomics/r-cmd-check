@@ -1,4 +1,4 @@
-# R check
+# R CMD check
 
 Scripts for Dockerized continuous integration tests.
 
