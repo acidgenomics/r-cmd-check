@@ -2,8 +2,6 @@
 
 Scripts for Dockerized continuous integration tests.
 
-Currently designed for use primarily with [Travis CI][].
-
 Special globals:
 
 - `CRAN=1`: Enable additional [CRAN][] submission checks. Note that this check doesn't work well with RStudio Package Manager (RSPM) enabled.
@@ -13,4 +11,3 @@ Special globals:
 
 [covr]: https://cran.r-project.org/package=covr
 [cran]: https://cran.r-project.org/
-[travis ci]: https://travis-ci.com/
